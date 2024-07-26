@@ -12,7 +12,7 @@ import { Outlet } from 'react-router-dom';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
-  const orders: TOrder[] = useSelector(getFeedOrders);
+  const orders = useSelector(getFeedOrders);
   const ordersError = useSelector(getErrorFeed);
 
   useEffect(() => {

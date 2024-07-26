@@ -1,0 +1,9 @@
+.container {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    inline-size: 100%;
+    block-size: 100%;
+}

@@ -7,7 +7,7 @@ interface IBurgerConstructorState {
   bun: TConstructorIngredient | null;
 }
 
-const initialState: IBurgerConstructorState = {
+export const initialState: IBurgerConstructorState = {
   ingredients: [],
   bun: null
 };

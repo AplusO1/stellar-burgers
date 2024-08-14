@@ -8,10 +8,10 @@ import { TOrder } from '@utils-types';
 
 describe('orderSlice', () => {
   const initialState = {
-    order: null,
+    order: null as TOrder | null,
     orderRequest: false,
-    errorDetailOrder: null,
-    errorCreateOrder: null
+    errorDetailOrder: null as string | null,
+    errorCreateOrder: null as string | null
   };
 
   const mockOrder: TOrder = {

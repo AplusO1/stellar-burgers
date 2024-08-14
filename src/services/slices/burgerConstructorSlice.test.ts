@@ -3,15 +3,11 @@ import {
   addIngredientToBurgerConstructor,
   deleteIngredientFromBurgerConstructor,
   changeIngredientLayer,
-  clearBurgerConstructor
+  clearBurgerConstructor,
+  initialState
 } from './burgerConstructorSlice';
 
 describe('burgerConstructorSlice', () => {
-  const initialState = {
-    bun: null,
-    ingredients: []
-  };
-
   const mockBun = {
     _id: '1',
     name: 'Краторная булка N-200i',

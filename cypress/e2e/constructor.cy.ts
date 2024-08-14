@@ -1,3 +1,12 @@
+export const BURGER_CONSTRUCTOR = '[data-cy=burger-constructor]';
+export const BUN_TOP = '[data-cy=bun-top]';
+export const BUN_BOTTOM = '[data-cy=bun-bottom]';
+export const MODAL = '[data-cy=modal]';
+export const MODAL_CLOSE_BUTTON = '[data-cy=modal-close-button]';
+export const MODAL_OVERLAY = '[data-cy=modal-overlay]';
+export const ORDER_NUMBER = '[data-cy=order-number]';
+export const USERNAME = '[data-cy=username]';
+
 describe('burgerConstructor', () => {
   beforeEach(() => {
     // Загрузка моковых данных
@@ -27,14 +36,14 @@ describe('burgerConstructor', () => {
     cy.wait('@getIngredients');
 
     // Ожидание рендера компонента
-    cy.get('[data-cy=burger-constructor]').should('exist');
+    cy.get(BURGER_CONSTRUCTOR).should('exist');
 
     // Проверка отсутствия булок в конструкторе перед добавлением
-    cy.get('[data-cy=burger-constructor]').should(
+    cy.get(BURGER_CONSTRUCTOR).should(
       'not.contain',
       'Краторная булка N-200i (верх)'
     );
-    cy.get('[data-cy=burger-constructor]').should(
+    cy.get(BURGER_CONSTRUCTOR).should(
       'not.contain',
       'Краторная булка N-200i (низ)'
     );
@@ -43,51 +52,42 @@ describe('burgerConstructor', () => {
     cy.contains('Добавить').should('exist').click();
 
     // Проверка присутствия булок в конструкторе после добавления
-    cy.get('[data-cy=bun-top]').should('exist');
-    cy.get('[data-cy=bun-bottom]').should('exist');
-    cy.get('[data-cy=bun-top]').contains('Краторная булка N-200i (верх)');
-    cy.get('[data-cy=bun-bottom]').contains('Краторная булка N-200i (низ)');
+    cy.get(BUN_TOP).should('exist');
+    cy.get(BUN_BOTTOM).should('exist');
+    cy.get(BUN_TOP).contains('Краторная булка N-200i (верх)');
+    cy.get(BUN_BOTTOM).contains('Краторная булка N-200i (низ)');
 
     // Проверка отсутствия ингредиентов в конструкторе перед добавлением
-    cy.get('[data-cy=burger-constructor]').should(
+    cy.get(BURGER_CONSTRUCTOR).should(
       'not.contain',
       'Биокотлета из марсианской Магнолии'
     );
-    cy.get('[data-cy=burger-constructor]').should(
+    cy.get(BURGER_CONSTRUCTOR).should(
       'not.contain',
       'Мясо бессмертных моллюсков Protostomia'
     );
-    cy.get('[data-cy=burger-constructor]').should(
+    cy.get(BURGER_CONSTRUCTOR).should(
       'not.contain',
       'Хрустящие минеральные кольца'
     );
-    cy.get('[data-cy=burger-constructor]').should(
-      'not.contain',
-      'Соус Spicy-X'
-    );
+    cy.get(BURGER_CONSTRUCTOR).should('not.contain', 'Соус Spicy-X');
 
-    // Добавление "Биокотлета из марсианской Магнолии"
+    // Добавление ингредиентов
     cy.contains('Биокотлета из марсианской Магнолии')
       .parent()
       .find('button')
       .contains('Добавить')
       .click();
-
-    // Добавление "Мясо бессмертных моллюсков Protostomia"
     cy.contains('Мясо бессмертных моллюсков Protostomia')
       .parent()
       .find('button')
       .contains('Добавить')
       .click();
-
-    // Добавление "Хрустящие минеральные кольца"
     cy.contains('Хрустящие минеральные кольца')
       .parent()
       .find('button')
       .contains('Добавить')
       .click();
-
-    // Добавление "Соус Spicy-X"
     cy.contains('Соус Spicy-X')
       .parent()
       .find('button')
@@ -95,7 +95,7 @@ describe('burgerConstructor', () => {
       .click();
 
     // Проверка наличия всех добавленных ингредиентов в конструкторе
-    cy.get('[data-cy=burger-constructor]').within(() => {
+    cy.get(BURGER_CONSTRUCTOR).within(() => {
       cy.contains('Биокотлета из марсианской Магнолии').should('exist');
       cy.contains('Мясо бессмертных моллюсков Protostomia').should('exist');
       cy.contains('Хрустящие минеральные кольца').should('exist');
@@ -111,20 +111,19 @@ describe('burgerConstructor', () => {
     cy.contains('Биокотлета из марсианской Магнолии').click();
 
     // Проверка, что модальное окно открылось
-    cy.get('[data-cy=modal]').should('be.visible');
+    cy.get(MODAL).should('be.visible');
 
     // Проверка закрытия модального окна по клику на крестик
-    cy.get('[data-cy=modal-close-button]').click();
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(MODAL_CLOSE_BUTTON).click();
+    cy.get(MODAL).should('not.exist');
 
     // Повторное открытие модального окна для проверки закрытия по клику на оверлей
     cy.contains('Биокотлета из марсианской Магнолии').click();
-    cy.get('[data-cy=modal]').should('be.visible');
+    cy.get(MODAL).should('be.visible');
 
     // Проверка закрытия модального окна по клику на оверлей
-    // force: true требуется, если оверлей перекрыт модальным окном
-    cy.get('[data-cy=modal-overlay]').click({ force: true });
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(MODAL_OVERLAY).click({ force: true });
+    cy.get(MODAL).should('not.exist');
   });
 
   it('должен обрабатывать авторизацию пользователя и создание заказа', () => {
@@ -135,7 +134,7 @@ describe('burgerConstructor', () => {
     cy.wait(['@getUserAuth', '@getIngredients']);
 
     // Проверка авторизации
-    cy.get('[data-cy=username]').should('contain', 'Alex1');
+    cy.get(USERNAME).should('contain', 'Alex1');
 
     // Сборка бургера
     cy.contains('Краторная булка N-200i')
@@ -165,7 +164,7 @@ describe('burgerConstructor', () => {
       .click();
 
     // Проверка наличия всех добавленных ингредиентов в конструкторе
-    cy.get('[data-cy=burger-constructor]').within(() => {
+    cy.get(BURGER_CONSTRUCTOR).within(() => {
       cy.contains('Краторная булка N-200i').should('exist');
       cy.contains('Филе Люминесцентного тетраодонтимформа').should('exist');
       cy.contains('Соус Spicy-X').should('exist');
@@ -177,15 +176,15 @@ describe('burgerConstructor', () => {
     cy.get('button').contains('Оформить заказ').click();
 
     // Проверка, что модальное окно открылось и номер заказа верный
-    cy.get('[data-cy=modal]').should('be.visible');
-    cy.get('[data-cy=order-number]').should('contain', '47777');
+    cy.get(MODAL).should('be.visible');
+    cy.get(ORDER_NUMBER).should('contain', '47777');
 
     // Закрытие модального окна и проверка успешности закрытия
-    cy.get('[data-cy=modal-close-button]').click();
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(MODAL_CLOSE_BUTTON).click();
+    cy.get(MODAL).should('not.exist');
 
     // Проверка, что конструктор пуст
-    cy.get('[data-cy=burger-constructor]').within(() => {
+    cy.get(BURGER_CONSTRUCTOR).within(() => {
       cy.contains('Краторная булка N-200i').should('not.exist');
       cy.contains('Филе Люминесцентного тетраодонтимформа').should('not.exist');
       cy.contains('Соус Spicy-X').should('not.exist');

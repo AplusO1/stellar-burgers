@@ -26,7 +26,7 @@ interface IOrderDetailState {
   errorCreateOrder: string | null;
 }
 
-const initialState: IOrderDetailState = {
+export const initialState: IOrderDetailState = {
   order: null,
   orderRequest: false,
   errorDetailOrder: null,

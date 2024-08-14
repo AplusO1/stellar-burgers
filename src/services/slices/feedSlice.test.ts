@@ -3,18 +3,12 @@ import {
   getFeedState,
   getFeedOrders,
   getErrorFeed,
-  fetchFeed
+  fetchFeed,
+  initialState
 } from './feedSlice';
 import { TOrder } from '@utils-types';
 
 describe('feedSlice', () => {
-  const initialState = {
-    orders: [],
-    total: null,
-    totalToday: null,
-    error: null
-  };
-
   const mockOrders: TOrder[] = [
     {
       _id: '1',

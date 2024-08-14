@@ -5,7 +5,8 @@ import {
   fetchUpdateUser,
   fetchLogoutUser,
   fetchGetUser,
-  checkUserAuth
+  checkUserAuth,
+  initialState
 } from './authUserSlice';
 import { TUser } from '@utils-types';
 
@@ -37,16 +38,6 @@ const localStorageMock = (function () {
 Object.defineProperty(global, 'localStorage', { value: localStorageMock });
 
 describe('authUserSlice', () => {
-  const initialState = {
-    userData: null,
-    isAuthChecked: false,
-    loginUserRequest: false,
-    errorRegistration: null,
-    errorLogin: null,
-    errorUpdate: null,
-    errorLogout: null
-  };
-
   const mockUser: TUser = {
     email: 'test@test.com',
     name: 'test user'

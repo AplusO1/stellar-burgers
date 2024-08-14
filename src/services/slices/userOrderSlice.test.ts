@@ -8,7 +8,7 @@ import { TOrder } from '@utils-types';
 
 describe('userOrdersSlice', () => {
   const initialState = {
-    orders: [],
+    orders: [] as TOrder[],
     error: null
   };
 

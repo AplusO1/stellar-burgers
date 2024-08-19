@@ -86,7 +86,7 @@ interface IAuthUser {
   errorLogout: string | null;
 }
 
-const initialState: IAuthUser = {
+export const initialState: IAuthUser = {
   userData: null,
   isAuthChecked: false,
   loginUserRequest: false,

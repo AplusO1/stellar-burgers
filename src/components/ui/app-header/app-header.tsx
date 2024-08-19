@@ -59,6 +59,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
             )
           }
           to={'profile'}
+          data-cy={'username'}
         >
           {userName || 'Личный кабинет'}
         </NavLink>
